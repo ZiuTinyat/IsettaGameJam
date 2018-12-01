@@ -6,8 +6,9 @@ using namespace Isetta;
 PowerCurve::PowerCurve(float power, int segNum) :
 	power_(power),
 	segmentationNum_(segNum),
-	segInterval_(1.f / (float)segmentationNum_)
+	segInterval_(1.f / (float)segNum)
 {
+	printf("%f, %f\n", segInterval_, power);
 	createSegs();
 }
 
@@ -18,6 +19,8 @@ void PowerCurve::createSegs()
 {
 	for (int i = 0; i < segmentationNum_; i++)
 	{
+		printf("%f, %f\n", segInterval_, power_);
+
 		float value = Math::Util::Pow(segInterval_ * (float)i, power_);
 		valueList.push_back(value);
 	}
@@ -31,6 +34,7 @@ float PowerCurve::GetValue(float x)
 	int ceil = Math::Util::CeilToInt(floatIndex);
 	floor = Math::Util::Clamp(0, segmentationNum_ - 1, floor);
 	ceil = Math::Util::Clamp(0, segmentationNum_ - 1, ceil);
+
 	if (floor == ceil)
 	{
 		return (valueList[floor] + valueList[ceil]) * .5f;

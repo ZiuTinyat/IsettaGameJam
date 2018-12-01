@@ -1,5 +1,6 @@
 #pragma once
 #include <IsettaEngine.h>
+#include "PowerCurve.h"
 using namespace Isetta;
 
 DEFINE_COMPONENT(CarControl, Component, false)
@@ -8,6 +9,8 @@ private:
 	float angle;
 	float angleSpeed;
 	float angleLimit;
+	float turningSpeed = 10;
+	float linearity = 1.3f;
 
 	U64 leftSteering;
 	U64 rightSteering;
@@ -16,9 +19,12 @@ private:
 
 	bool pressingLeft;
 	bool pressingRight;
+
+	float xDimLinearity;
+	PowerCurve powerCurve;
 public:
 	// A component MUST have a default constructor
-	CarControl() = default;
+	CarControl() :powerCurve(linearity, 10) {};
 
 	// Awake is called once, immediately when the component is first created and enabled
 	//void Awake() override;
@@ -29,13 +35,13 @@ public:
 	// OnDisable is called immediately each time the component becomes inactive
 	void OnDisable() override;
 	// Update is called each frame (variable delta time)
-	void Update() override;
+	//void Update() override;
 	// GuiUpdate is called each frame (variable delta time), GUI can only be called in GuiUpdate
 	//void GuiUpdate() override;
 	// LateUpdate is called each frame (variable delta time)
 	//void LateUpdate() override;
 	// FixedUpdate is called on fixed time (constant delta time)
-	//void FixedUpdate() override;
+	void FixedUpdate() override;
 	// OnDestroy is called once when the component is destroyed
 	//void OnDestroy() override;
 
