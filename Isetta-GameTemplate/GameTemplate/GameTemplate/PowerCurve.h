@@ -3,12 +3,13 @@
 
 class PowerCurve {
 public:
-	PowerCurve(float power, unsigned int segNum);
+	PowerCurve(float power, int segNum);
 	~PowerCurve();
-
+	float GetValue(float x);
 private:
 	void createSegs();
 	float power_ = 1.f;
-	unsigned int segmentationNum_ = 10;
+	float segInterval_;
+	int segmentationNum_ = 10;
 	std::vector<float> valueList;
 };

@@ -9,6 +9,13 @@ private:
 	float angleSpeed;
 	float angleLimit;
 
+	U64 leftSteering;
+	U64 rightSteering;
+	U64 leftRelease;
+	U64 rightRelease;
+
+	bool pressingLeft;
+	bool pressingRight;
 public:
 	// A component MUST have a default constructor
 	CarControl() = default;
@@ -18,9 +25,9 @@ public:
 	// Start is called once, on the first update frame after the component is created and enabled
 	void Start() override;
 	// OnEnable is called immediately each time the component becomes active, including after creation
-	//void OnEnable() override;
+	void OnEnable() override;
 	// OnDisable is called immediately each time the component becomes inactive
-	//void OnDisable() override;
+	void OnDisable() override;
 	// Update is called each frame (variable delta time)
 	void Update() override;
 	// GuiUpdate is called each frame (variable delta time), GUI can only be called in GuiUpdate
