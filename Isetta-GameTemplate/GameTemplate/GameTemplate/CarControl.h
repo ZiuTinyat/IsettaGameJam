@@ -1,7 +1,14 @@
 #pragma once
 #include <IsettaEngine.h>
 #include "PowerCurve.h"
+#include "GameManager.h"
+
 using namespace Isetta;
+enum LeftOrRight
+{
+	Left,
+	Right
+};
 
 DEFINE_COMPONENT(CarControl, Component, false)
 private:
@@ -12,7 +19,7 @@ private:
 	float turningSpeed = 10;
 	float linearity = 1.3f;
 	float restraightSpeed = 2;
-	float horizontalSpeed = 0.1f;
+	float horizontalSpeed = 0.18f;
 
 	U64 leftSteering;
 	U64 rightSteering;
@@ -24,7 +31,14 @@ private:
 
 	float xDimLinearity;
 	PowerCurve powerCurve;
+
+	float drunkTimeLeft;
+
+	LeftOrRight drunkDirection;
+
 public:
+
+	GameManager * gm;
 	// A component MUST have a default constructor
 	CarControl() :powerCurve(linearity, 10) {};
 

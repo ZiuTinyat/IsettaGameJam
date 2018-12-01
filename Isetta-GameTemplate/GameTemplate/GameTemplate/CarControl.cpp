@@ -6,6 +6,8 @@
 using namespace Isetta;
 using namespace Math;
 
+
+
 void CarControl::Start() {
 	angle = 0;
 	angleSpeed = 5;
@@ -54,8 +56,38 @@ void CarControl::OnDisable()
 
 void CarControl::FixedUpdate() {
 	float move;
+	if (drunkTimeLeft <= 0.f && Math::Random::GetRandom01() < 0.02f)
+	{
+		drunkTimeLeft = 0.3f;
+		if (Math::Random::GetRandom01() > 0.5f)
+			drunkDirection = LeftOrRight::Left;
+		else
+			drunkDirection = LeftOrRight::Right;
+	}
+	if (drunkTimeLeft > 0.f)
+	{
+		drunkTimeLeft -= Time::GetFixedDeltaTime();
+		if (drunkTimeLeft <= 0.f)
+		{
+			xDimLinearity = 0.2f;
+			pressingLeft = false;
+			pressingRight = false;
+		}
+		switch (drunkDirection)
+		{
+		case LeftOrRight::Left:
+			if(!pressingRight)
+			pressingLeft = true;
+			break;
+
+		case LeftOrRight::Right:
+			if (!pressingLeft)
+			pressingRight = true;
+			break;
+		}
+	}
 	if(pressingLeft || pressingRight)
-	xDimLinearity += Time::GetDeltaTime() * turningSpeed;
+		xDimLinearity += Time::GetDeltaTime() * turningSpeed;
 	xDimLinearity = Math::Util::Clamp01(xDimLinearity);
 	move = powerCurve.GetValue(xDimLinearity) * angleSpeed;
 	if (pressingLeft) {
@@ -75,9 +107,10 @@ void CarControl::FixedUpdate() {
 
 	transform->SetLocalRot(Vector3{ 0, angle, 0 });
 
-	float horizontalProjection = Math::Util::Sin(angle/180.f * Math::Util::PI) * horizontalSpeed;
+	float horizontalProjection = Math::Util::Sin(angle/180.f * Math::Util::PI) * horizontalSpeed * (1.f- gm->carSpeed / gm->carMaxSpeed*.2f);
 
 	Vector3 pos = transform->GetWorldPos();
 
 	transform->SetWorldPos(Vector3(pos.x + horizontalProjection, pos.y, pos.z));
+
 }
