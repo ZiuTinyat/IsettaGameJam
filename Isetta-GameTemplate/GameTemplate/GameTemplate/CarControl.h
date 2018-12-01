@@ -8,7 +8,6 @@ private:
 	float angle;
 	float angleSpeed;
 	float angleLimit;
-	Transform a;
 public:
 	// A component MUST have a default constructor
 	CarControl() = default;
