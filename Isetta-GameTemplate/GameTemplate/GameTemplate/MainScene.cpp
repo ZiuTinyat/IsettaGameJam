@@ -72,7 +72,17 @@ Entity* MainScene::CreateCar(std::string name, Vector3 pos) {
 	cyl3->SetTransform(Vector3{ -0.35f, 0.2f, -0.518f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.073f,  0.35f, 0.35f });
 	cyl3->transform->SetParent(carEntity->transform);
 
+	Entity* boost0, *boost1;
+	boost0 = Primitive::Create(Primitive::Type::Cube, "b0", false);
+	boost0->SetTransform(Vector3{ 0.24f, 0.295f, 0.984f }, Vector3::zero, Vector3{ 0.1f,  0.1f, 0.001f });
+	boost0->transform->SetParent(carEntity->transform);
+	boost1 = Primitive::Create(Primitive::Type::Cube, "b1", false);
+	boost1->SetTransform(Vector3{ -0.24f, 0.295f, 0.984f }, Vector3::zero, Vector3{ 0.1f,  0.1f, 0.001f });
+	boost1->transform->SetParent(carEntity->transform);
+
 	carEntity->AddComponent<CarControl>();
+	carEntity->GetComponent<CarControl>()->boost0 = boost0;
+	carEntity->GetComponent<CarControl>()->boost1 = boost1;
 	carEntity->transform->SetWorldPos(pos);
 
 	return carEntity;
@@ -111,6 +121,18 @@ Entity* MainScene::CreateRoad(std::string name, Vector3 pos) {
 	cube9 = Primitive::Create(Primitive::Type::Cube, "Cube9", false);
 	cube9->SetTransform(Vector3{ -1, 0, 17.5f }, Vector3::zero, Vector3{ 0.2f, 0.01f, 3 });
 	cube9->transform->SetParent(roadEntity->transform);
+	
+	Entity* env;
+	if (Math::Random::GetRandom01() < 0.3f) {
+		env = Primitive::Create(Primitive::Type::Cube, "env", false);
+		env->SetTransform(Vector3{ -10, 1, 5 }, Vector3::zero, Vector3{ 1, 2, 1 });
+		env->transform->SetParent(roadEntity->transform);
+	}
+	if (Math::Random::GetRandom01() < 0.3f) {
+		env = Primitive::Create(Primitive::Type::Cube, "env", false);
+		env->SetTransform(Vector3{ 10, 1, 15 }, Vector3::zero, Vector3{ 1, 2, 1 });
+		env->transform->SetParent(roadEntity->transform);
+	}
 
 	roadEntity->transform->SetWorldPos(pos);
 	

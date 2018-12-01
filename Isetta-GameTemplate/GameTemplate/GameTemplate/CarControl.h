@@ -25,6 +25,8 @@ private:
 	float xDimLinearity;
 	PowerCurve powerCurve;
 public:
+	Entity * boost0, *boost1;
+
 	// A component MUST have a default constructor
 	CarControl() :powerCurve(linearity, 10) {};
 
