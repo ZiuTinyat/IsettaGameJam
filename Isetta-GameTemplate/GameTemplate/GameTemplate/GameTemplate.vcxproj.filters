@@ -27,6 +27,9 @@
     <ClCompile Include="MyScript.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CarControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IsettaEngine.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MyScript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CarControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

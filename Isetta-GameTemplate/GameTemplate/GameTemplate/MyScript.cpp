@@ -23,5 +23,5 @@ void MyScript::Update() {
 	//if (Input::IsKeyPressed(KeyCode::ESCAPE)) {
 		
 	//}
-	transform->RotateLocal(Vector3::forward * Time::GetDeltaTime() * 60.0f);
+	transform->RotateLocal(Vector3::up * Time::GetDeltaTime() * 60.0f);
 }
