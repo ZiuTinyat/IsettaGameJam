@@ -121,6 +121,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CarControl.cpp" />
+    <ClCompile Include="ToResourcesView.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="IsettaEngine.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -130,12 +131,15 @@
     </ClCompile>
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="MyScript.cpp" />
+    <ClCompile Include="ResourcesViewLevel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CarControl.h" />
+    <ClInclude Include="ToResourcesView.h" />
     <ClInclude Include="IsettaEngine.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="MyScript.h" />
+    <ClInclude Include="ResourcesViewLevel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

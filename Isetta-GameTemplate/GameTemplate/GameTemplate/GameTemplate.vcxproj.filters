@@ -28,6 +28,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CarControl.cpp">
+    <ClCompile Include="ResourcesViewLevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ToResourcesView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,6 +46,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CarControl.h">
+    <ClInclude Include="ResourcesViewLevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ToResourcesView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,6 +4,7 @@
 #include "MainScene.h"
 #include "MyScript.h"
 #include "CarControl.h"
+#include "ToResourcesView.h"
 
 using namespace Isetta;
 using namespace Math;
@@ -12,8 +13,9 @@ void MainScene::Load() {
 	// Level NEEDS a camera
 	Entity* cameraEntity = Entity::Instantiate("Camera");
 	cameraEntity->AddComponent<CameraComponent>();
-	cameraEntity->SetTransform(Math::Vector3{ 0, 2, 4 }, Math::Vector3{ -30, 0, 0 },
-		Math::Vector3::one);
+	cameraEntity->SetTransform(Math::Vector3{ 0, 2, 4 }, Math::Vector3{ -30, 0, 0 }, Math::Vector3::one);
+	cameraEntity->AddComponent<ToResourcesView>();
+		
 
 	// Light
 	Entity* lightEntity{ Entity::Instantiate("Light") };
