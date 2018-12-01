@@ -32,6 +32,7 @@ void MainScene::Load() {
 	roadEntity->AddComponent<GameManager>();
 
 	Entity* carEntity = CreateCar("PlayerCar");
+	carEntity->GetComponent<CarControl>()->gm = roadEntity->GetComponent<GameManager>();
 }
 
 Entity* MainScene::CreateCar(std::string name, Vector3 pos) {
@@ -84,7 +85,7 @@ Entity* MainScene::CreateCar(std::string name, Vector3 pos) {
 	carEntity->GetComponent<CarControl>()->boost0 = boost0;
 	carEntity->GetComponent<CarControl>()->boost1 = boost1;
 	carEntity->transform->SetWorldPos(pos);
-
+	
 	return carEntity;
 }
 
