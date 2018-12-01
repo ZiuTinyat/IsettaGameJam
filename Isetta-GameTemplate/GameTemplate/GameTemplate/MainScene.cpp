@@ -4,6 +4,7 @@
 #include "MainScene.h"
 #include "MyScript.h"
 #include "CarControl.h"
+#include "GameManager.h"
 //#include "Components/Editor/EditorComponent.h"
 
 using namespace Isetta;
@@ -13,7 +14,7 @@ void MainScene::Load() {
 	// Level NEEDS a camera
 	Entity* cameraEntity = Entity::Instantiate("Camera");
 	cameraEntity->AddComponent<CameraComponent>();
-	cameraEntity->SetTransform(Vector3{ 0, 2, -4 }, Vector3{ -30, 180, 0 },
+	cameraEntity->SetTransform(Vector3{ 0, 2, -3 }, Vector3{ -30, 180, 0 },
 		Math::Vector3::one);
 	//cameraEntity->AddComponent<EditorComponent>();
 
@@ -25,10 +26,15 @@ void MainScene::Load() {
 	lightEntity1->AddComponent<LightComponent>();
 	lightEntity1->SetTransform(Vector3{ -500, 400, -300 }, Vector3{ -180, 0, 0 }, Vector3::one);
 
+	// Road
+	Entity* roadEntity = Entity::Instantiate("Road");
+	roadEntity->transform->SetWorldPos(Vector3::back * 20);
+	roadEntity->AddComponent<GameManager>();
+
 	Entity* carEntity = CreateCar("PlayerCar");
 }
 
-Entity* MainScene::CreateCar(std::string name) {
+Entity* MainScene::CreateCar(std::string name, Vector3 pos) {
 	Entity* carEntity = Entity::Instantiate(name);
 	Entity* cube0, *cube1, *cube2, *cube3, *cube4, *cube5, *cyl0, *cyl1, *cyl2, *cyl3;
 	cube0 = Primitive::Create(Primitive::Type::Cube, "Cube0", false);
@@ -67,10 +73,49 @@ Entity* MainScene::CreateCar(std::string name) {
 	cyl3->transform->SetParent(carEntity->transform);
 
 	carEntity->AddComponent<CarControl>();
+	carEntity->transform->SetWorldPos(pos);
 
 	return carEntity;
 }
 
+Entity* MainScene::CreateRoad(std::string name, Vector3 pos) {
+	Entity* roadEntity = Entity::Instantiate(name);
+	Entity* cube0, *cube1, *cube2, *cube3, *cube4, *cube5, *cube6, *cube7, *cube8, *cube9;
+	cube0 = Primitive::Create(Primitive::Type::Cube, "Cube0", false);
+	cube0->SetTransform(Vector3{ 3, 0, 10 }, Vector3::zero, Vector3{ 0.2f, 0.2f, 20 });
+	cube0->transform->SetParent(roadEntity->transform);
+	cube1 = Primitive::Create(Primitive::Type::Cube, "Cube1", false);
+	cube1->SetTransform(Vector3{ -3, 0, 10 }, Vector3::zero, Vector3{ 0.2f, 0.2f, 20 });
+	cube1->transform->SetParent(roadEntity->transform);
+	cube2 = Primitive::Create(Primitive::Type::Cube, "Cube2", false);
+	cube2->SetTransform(Vector3{ 1, 0, 2.5f }, Vector3::zero, Vector3{ 0.2f, 0.01f, 3 });
+	cube2->transform->SetParent(roadEntity->transform);
+	cube3 = Primitive::Create(Primitive::Type::Cube, "Cube3", false);
+	cube3->SetTransform(Vector3{ -1, 0, 2.5f }, Vector3::zero, Vector3{ 0.2f, 0.01f, 3 });
+	cube3->transform->SetParent(roadEntity->transform);
+	cube4 = Primitive::Create(Primitive::Type::Cube, "Cube4", false);
+	cube4->SetTransform(Vector3{ 1, 0, 7.5f }, Vector3::zero, Vector3{ 0.2f, 0.01f, 3 });
+	cube4->transform->SetParent(roadEntity->transform);
+	cube5 = Primitive::Create(Primitive::Type::Cube, "Cube5", false);
+	cube5->SetTransform(Vector3{ -1, 0, 7.5f }, Vector3::zero, Vector3{ 0.2f, 0.01f, 3 });
+	cube5->transform->SetParent(roadEntity->transform);
+	cube6 = Primitive::Create(Primitive::Type::Cube, "Cube6", false);
+	cube6->SetTransform(Vector3{ 1, 0, 12.5f }, Vector3::zero, Vector3{ 0.2f, 0.01f, 3 });
+	cube6->transform->SetParent(roadEntity->transform);
+	cube7 = Primitive::Create(Primitive::Type::Cube, "Cube7", false);
+	cube7->SetTransform(Vector3{ -1, 0, 12.5f }, Vector3::zero, Vector3{ 0.2f, 0.01f, 3 });
+	cube7->transform->SetParent(roadEntity->transform);
+	cube8 = Primitive::Create(Primitive::Type::Cube, "Cube8", false);
+	cube8->SetTransform(Vector3{ 1, 0, 17.5f }, Vector3::zero, Vector3{ 0.2f, 0.01f, 3 });
+	cube8->transform->SetParent(roadEntity->transform);
+	cube9 = Primitive::Create(Primitive::Type::Cube, "Cube9", false);
+	cube9->SetTransform(Vector3{ -1, 0, 17.5f }, Vector3::zero, Vector3{ 0.2f, 0.01f, 3 });
+	cube9->transform->SetParent(roadEntity->transform);
+
+	roadEntity->transform->SetWorldPos(pos);
+	
+	return roadEntity;
+}
 
 void MainScene::OnUnload() {
 	// Anything you might need to do on the level unloading
