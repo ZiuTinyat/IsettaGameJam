@@ -20,13 +20,16 @@ void MainScene::Load() {
 	// Light
 	Entity* lightEntity{ Entity::Instantiate("Light") };
 	lightEntity->AddComponent<LightComponent>();
-	lightEntity->SetTransform(Vector3{ 500, 400, -600 }, Vector3{ -180, 0, 0 }, Vector3::one);
+	lightEntity->SetTransform(Vector3{ 500, 400, -300 }, Vector3{ -180, 0, 0 }, Vector3::one);
 	Entity* lightEntity1{ Entity::Instantiate("Light1") };
 	lightEntity1->AddComponent<LightComponent>();
-	lightEntity1->SetTransform(Vector3{ -500, 400, -600 }, Vector3{ -180, 0, 0 }, Vector3::one);
+	lightEntity1->SetTransform(Vector3{ -500, 400, -300 }, Vector3{ -180, 0, 0 }, Vector3::one);
 
-	// Car
-	Entity* carEntity = Entity::Instantiate("CarParent");
+	Entity* carEntity = CreateCar("PlayerCar");
+}
+
+Entity* MainScene::CreateCar(std::string name) {
+	Entity* carEntity = Entity::Instantiate(name);
 	Entity* cube0, *cube1, *cube2, *cube3, *cube4, *cube5, *cyl0, *cyl1, *cyl2, *cyl3;
 	cube0 = Primitive::Create(Primitive::Type::Cube, "Cube0", false);
 	cube0->SetTransform(Vector3{ 0, 0.466f, -0.155f }, Vector3{ 5, 0, 0 }, Vector3{ 0.79f, 0.5f, 0.73f });
@@ -64,21 +67,10 @@ void MainScene::Load() {
 	cyl3->transform->SetParent(carEntity->transform);
 
 	carEntity->AddComponent<CarControl>();
-	/*
-	// Cube
-	Entity* entity;
-	entity = Primitive::Create(Primitive::Type::Cube);
-	entity->transform->SetWorldPos(Math::Vector3{ 0.0f, 0.0f, 0.0f });
-	entity->AddComponent<MyScript>();
 
-	// Child
-	Entity* entity2;
-	entity2 = Primitive::Create(Primitive::Type::Cube);
-	entity2->transform->SetWorldPos(Math::Vector3{ 0.0f, 2.0f, 0.0f });
-	entity2->transform->SetLocalScale(Math::Vector3{ 0.25f, 2.0f, 0.25f });
-	entity2->transform->SetParent(entity->transform);
-	*/
+	return carEntity;
 }
+
 
 void MainScene::OnUnload() {
 	// Anything you might need to do on the level unloading
