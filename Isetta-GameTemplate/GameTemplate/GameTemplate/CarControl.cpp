@@ -8,8 +8,8 @@ using namespace Math;
 
 void CarControl::Start() {
 	angle = 0;
-	angleSpeed = 40;
-	angleLimit = 10;
+	angleSpeed = 50;
+	angleLimit = 15;
 }
 
 void CarControl::Update() {

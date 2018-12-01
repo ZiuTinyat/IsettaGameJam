@@ -4,7 +4,7 @@
 #include "MainScene.h"
 #include "MyScript.h"
 #include "CarControl.h"
-#include "ToResourcesView.h"
+//#include "Components/Editor/EditorComponent.h"
 
 using namespace Isetta;
 using namespace Math;
@@ -13,19 +13,17 @@ void MainScene::Load() {
 	// Level NEEDS a camera
 	Entity* cameraEntity = Entity::Instantiate("Camera");
 	cameraEntity->AddComponent<CameraComponent>();
-	cameraEntity->SetTransform(Math::Vector3{ 0, 2, 4 }, Math::Vector3{ -30, 0, 0 }, Math::Vector3::one);
-	cameraEntity->AddComponent<ToResourcesView>();
-		
+	cameraEntity->SetTransform(Vector3{ 0, 2, -4 }, Vector3{ -30, 180, 0 },
+		Math::Vector3::one);
+	//cameraEntity->AddComponent<EditorComponent>();
 
 	// Light
 	Entity* lightEntity{ Entity::Instantiate("Light") };
 	lightEntity->AddComponent<LightComponent>();
-	lightEntity->SetTransform(Math::Vector3{ 0, 200, 600 }, Math::Vector3::zero,
-		Math::Vector3::one);
-	Entity* lightEntity1{ Entity::Instantiate("Light") };
+	lightEntity->SetTransform(Vector3{ 500, 400, -600 }, Vector3{ -180, 0, 0 }, Vector3::one);
+	Entity* lightEntity1{ Entity::Instantiate("Light1") };
 	lightEntity1->AddComponent<LightComponent>();
-	lightEntity1->SetTransform(Math::Vector3{ 0, 200, 600 }, Math::Vector3::zero,
-		Math::Vector3::one);
+	lightEntity1->SetTransform(Vector3{ -500, 400, -600 }, Vector3{ -180, 0, 0 }, Vector3::one);
 
 	// Car
 	Entity* carEntity = Entity::Instantiate("CarParent");
@@ -36,8 +34,8 @@ void MainScene::Load() {
 	cube1 = Primitive::Create(Primitive::Type::Cube, "Cube1", false);
 	cube1->SetTransform(Vector3{ 0, 0.3f, 0.0f }, Vector3::zero, Vector3{ 0.79f, 0.3f, 2.0f });
 	cube1->transform->SetParent(carEntity->transform);
-	cube2 = Primitive::Create(Primitive::Type::Cube, "Cube2", true);
-	cube2->SetTransform(Vector3{ 0, 0.421f, 0.328f }, Vector3{ 34.6f, 0, 0}, Vector3{ 0.79f, 0.31f, 0.46f });
+	cube2 = Primitive::Create(Primitive::Type::Cube, "Cube2", false);
+	cube2->SetTransform(Vector3{ 0, 0.421f, 0.328f }, Vector3{ 34.6f, 0, 0 }, Vector3{ 0.79f, 0.31f, 0.46f });
 	cube2->transform->SetParent(carEntity->transform);
 	cube3 = Primitive::Create(Primitive::Type::Cube, "Cube3", false);
 	cube3->SetTransform(Vector3{ 0, 0.4f, 0.63f }, Vector3{ 9.0f, 0, 0 }, Vector3{ 0.79f, 0.2f, 0.72f });
@@ -49,16 +47,20 @@ void MainScene::Load() {
 	cube5->SetTransform(Vector3{ 0, 0.39f, -0.72f }, Vector3{ -9.0f, 0, 0 }, Vector3{ 0.79f, 0.2f, 0.526f });
 	cube5->transform->SetParent(carEntity->transform);
 	cyl0 = Primitive::Create(Primitive::Type::Cylinder, "cyl0", false);
-	cyl0->SetTransform(Vector3{ 0.35f, 0.2f, 0.641f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.35f, 0.073f, 0.35f });
+	//cyl0->SetTransform(Vector3{ 0.35f, 0.2f, 0.641f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.35f, 0.073f, 0.35f });
+	cyl0->SetTransform(Vector3{ 0.35f, 0.2f, 0.641f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.073f,  0.35f, 0.35f });
 	cyl0->transform->SetParent(carEntity->transform);
 	cyl1 = Primitive::Create(Primitive::Type::Cylinder, "cyl1", false);
-	cyl1->SetTransform(Vector3{ 0.35f, 0.2f, -0.518f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.35f, 0.073f, 0.35f });
+	//cyl1->SetTransform(Vector3{ 0.35f, 0.2f, -0.518f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.35f, 0.073f, 0.35f });
+	cyl1->SetTransform(Vector3{ 0.35f, 0.2f, -0.518f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.073f,  0.35f, 0.35f });
 	cyl1->transform->SetParent(carEntity->transform);
 	cyl2 = Primitive::Create(Primitive::Type::Cylinder, "cyl2", false);
-	cyl2->SetTransform(Vector3{ -0.35f, 0.2f, 0.641f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.35f, 0.073f, 0.35f });
+	//cyl2->SetTransform(Vector3{ -0.35f, 0.2f, 0.641f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.35f, 0.073f, 0.35f });
+	cyl2->SetTransform(Vector3{ -0.35f, 0.2f, 0.641f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.073f,  0.35f, 0.35f });
 	cyl2->transform->SetParent(carEntity->transform);
 	cyl3 = Primitive::Create(Primitive::Type::Cylinder, "cyl3", false);
-	cyl3->SetTransform(Vector3{ -0.35f, 0.2f, -0.518f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.35f, 0.073f, 0.35f });
+	//cyl3->SetTransform(Vector3{ -0.35f, 0.2f, -0.518f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.35f, 0.073f, 0.35f });
+	cyl3->SetTransform(Vector3{ -0.35f, 0.2f, -0.518f }, Vector3{ 0.0f, 0.0f, 90.0f }, Vector3{ 0.073f,  0.35f, 0.35f });
 	cyl3->transform->SetParent(carEntity->transform);
 
 	carEntity->AddComponent<CarControl>();
