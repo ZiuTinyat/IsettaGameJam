@@ -113,4 +113,8 @@ void CarControl::FixedUpdate() {
 
 	transform->SetWorldPos(Vector3(pos.x + horizontalProjection, pos.y, pos.z));
 
+	if (Math::Util::Abs(pos.x) > 2.3f)
+	{
+		LevelManager::Instance().LoadLevel("ResourcesViewLevel");
+	}
 }

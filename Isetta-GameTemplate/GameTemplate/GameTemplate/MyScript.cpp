@@ -12,7 +12,7 @@ void MyScript::Start() {
 
 void MyScript::OnEnable() {
 	handleEscPress = Input::RegisterKeyPressCallback(
-		KeyCode::ESCAPE, []() { Application::Exit(); });
+		KeyCode::SPACE, []() { LevelManager::Instance().LoadLevel("MainScene"); });
 }
 
 void MyScript::OnDisable() {
