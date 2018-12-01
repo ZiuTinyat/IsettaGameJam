@@ -11,6 +11,7 @@ void CarControl::Start() {
 	angleSpeed = 5;
 	angleLimit = 15;
 	turningSpeed;
+	xDimLinearity = 0.2;
 }
 
 void CarControl::OnEnable()
@@ -23,7 +24,7 @@ void CarControl::OnEnable()
 	leftRelease = Input::RegisterKeyReleaseCallback(KeyCode::LEFT_ARROW, [&]() {
 		pressingLeft = false;
 		if (!pressingRight)
-		xDimLinearity = 0.f;
+		xDimLinearity = 0.2f;
 		else		
 			xDimLinearity = 0.2f;
 
@@ -32,7 +33,7 @@ void CarControl::OnEnable()
 	rightRelease= Input::RegisterKeyReleaseCallback(KeyCode::RIGHT_ARROW, [&]() {
 		pressingRight = false;
 		if (!pressingLeft)
-			xDimLinearity = 0.f;
+			xDimLinearity = 0.2f;
 		else
 			xDimLinearity = 0.2f;
 	});
@@ -64,8 +65,8 @@ void CarControl::FixedUpdate() {
 	}
 	else {
 		// To zero
-		if (angle > 0.4f) angle -= powerCurve.GetValue(0.2f) * angleSpeed;
-		else if (angle < -0.4f) angle += powerCurve.GetValue(0.2f) * angleSpeed;
+		if (angle > 0.4f) angle -= powerCurve.GetValue(Math::Util::Abs(angle)/angleLimit)*restraightSpeed;
+		else if (angle < -0.4f) angle += powerCurve.GetValue(Math::Util::Abs(angle) / angleLimit)*restraightSpeed;
 		else angle = 0;
 	}
 
@@ -73,4 +74,10 @@ void CarControl::FixedUpdate() {
 	else if (angle < -angleLimit) angle = -angleLimit;
 
 	transform->SetLocalRot(Vector3{ 0, angle, 0 });
+
+	float horizontalProjection = Math::Util::Sin(angle/180.f * Math::Util::PI) * horizontalSpeed;
+
+	Vector3 pos = transform->GetWorldPos();
+
+	transform->SetWorldPos(Vector3(pos.x + horizontalProjection, pos.y, pos.z));
 }

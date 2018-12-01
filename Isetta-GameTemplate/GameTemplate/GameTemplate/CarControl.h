@@ -11,6 +11,8 @@ private:
 	float angleLimit;
 	float turningSpeed = 10;
 	float linearity = 1.3f;
+	float restraightSpeed = 2;
+	float horizontalSpeed = 0.1f;
 
 	U64 leftSteering;
 	U64 rightSteering;
