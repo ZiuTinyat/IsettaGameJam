@@ -19,7 +19,7 @@ void GameManager::Start() {
 void GameManager::Update() {
 	if (Input::IsKeyPressed(KeyCode::SPACE)) { // BOOSTING
 		carMaxSpeed = 45;
-		carAcc = 20;		
+		carAcc = 30;		
 	}
 	else {
 		carMaxSpeed = 25;

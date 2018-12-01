@@ -16,7 +16,7 @@ public:
 	float carSpeed = 0;
 	float carMaxSpeed = 25;
 	float carAcc = 8;
-	float carDecc = 15;
+	float carDecc = 30;
 
 	// A component MUST have a default constructor
 	GameManager() = default;
