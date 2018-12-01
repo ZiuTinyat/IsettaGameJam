@@ -12,6 +12,24 @@ void CarControl::Start() {
 	angleLimit = 10;
 }
 
+void CarControl::OnEnable()
+{
+	leftSteering = Input::RegisterKeyPressCallback(KeyCode::LEFT_ARROW, [&]() {
+		pressingLeft = true;
+
+	});
+	rightSteering = Input::RegisterKeyPressCallback(KeyCode::RIGHT_ARROW, [&]() {
+
+	});
+}
+
+void CarControl::OnDisable()
+{
+	Input::UnregisterKeyPressCallback(KeyCode::LEFT_ARROW, leftSteering);
+	Input::UnregisterKeyPressCallback(KeyCode::RIGHT_ARROW, rightSteering);
+
+}
+
 void CarControl::Update() {
 	float move = Time::GetDeltaTime() * angleSpeed;
 	if (Input::IsKeyPressed(KeyCode::LEFT_ARROW)) {
