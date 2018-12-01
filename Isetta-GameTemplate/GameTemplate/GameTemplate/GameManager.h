@@ -12,10 +12,11 @@ private:
 	void GenerateBlock();
 
 public:
+	Entity * boost0, *boost1;
 	float carSpeed = 0;
-	float carMaxSpeed = 30;
-	float carAcc = 10;
-	float carDecc = 20;
+	float carMaxSpeed = 25;
+	float carAcc = 8;
+	float carDecc = 15;
 
 	// A component MUST have a default constructor
 	GameManager() = default;

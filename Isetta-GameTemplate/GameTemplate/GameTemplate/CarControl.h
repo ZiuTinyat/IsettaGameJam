@@ -37,6 +37,7 @@ private:
 	LeftOrRight drunkDirection;
 
 public:
+	Entity * boost0, *boost1;
 
 	GameManager * gm;
 	// A component MUST have a default constructor
