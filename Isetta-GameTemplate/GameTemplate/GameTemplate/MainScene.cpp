@@ -33,6 +33,8 @@ void MainScene::Load() {
 
 	Entity* carEntity = CreateCar("PlayerCar");
 	carEntity->GetComponent<CarControl>()->gm = roadEntity->GetComponent<GameManager>();
+	roadEntity->GetComponent<GameManager>()->boost0 = carEntity->GetComponent<CarControl>()->boost0;
+	roadEntity->GetComponent<GameManager>()->boost1 = carEntity->GetComponent<CarControl>()->boost1;
 }
 
 Entity* MainScene::CreateCar(std::string name, Vector3 pos) {
@@ -75,10 +77,10 @@ Entity* MainScene::CreateCar(std::string name, Vector3 pos) {
 
 	Entity* boost0, *boost1;
 	boost0 = Primitive::Create(Primitive::Type::Cube, "b0", false);
-	boost0->SetTransform(Vector3{ 0.24f, 0.295f, 0.984f }, Vector3::zero, Vector3{ 0.1f,  0.1f, 0.001f });
+	boost0->SetTransform(Vector3{ 0.24f, 0.295f, -0.984f }, Vector3::zero, Vector3{ 0.1f,  0.1f, 0.00001f });
 	boost0->transform->SetParent(carEntity->transform);
 	boost1 = Primitive::Create(Primitive::Type::Cube, "b1", false);
-	boost1->SetTransform(Vector3{ -0.24f, 0.295f, 0.984f }, Vector3::zero, Vector3{ 0.1f,  0.1f, 0.001f });
+	boost1->SetTransform(Vector3{ -0.24f, 0.295f, -0.984f }, Vector3::zero, Vector3{ 0.1f,  0.1f, 0.00001f });
 	boost1->transform->SetParent(carEntity->transform);
 
 	carEntity->AddComponent<CarControl>();

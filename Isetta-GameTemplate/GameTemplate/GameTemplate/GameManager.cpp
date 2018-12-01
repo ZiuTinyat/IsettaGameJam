@@ -19,17 +19,17 @@ void GameManager::Start() {
 void GameManager::Update() {
 	if (Input::IsKeyPressed(KeyCode::SPACE)) { // BOOSTING
 		carMaxSpeed = 45;
-		carAcc = 20;
-		Vector3 scale = boost0->transform->GetLocalScale();
-		scale.z = Math::Util::Lerp(0, 2.5f, (carSpeed - 20) / (45 - 20));
-		boost0->transform->SetLocalScale(scale);
-		boost1->transform->SetLocalScale(scale);
+		carAcc = 20;		
 	}
 	else {
 		carMaxSpeed = 25;
 		carAcc = 8;
-		
 	}
+	Vector3 scale = boost0->transform->GetLocalScale();
+	scale.z = Math::Util::Lerp(0, 2.5f, (carSpeed - 25) / (45 - 25));
+	if (scale.z < 0) scale.z = 0.00001f;
+	boost0->transform->SetLocalScale(scale);
+	boost1->transform->SetLocalScale(scale);
 
 	if (-transform->GetLocalPos().z > blockOffset - 80) {
 		GenerateBlock();
